@@ -13,19 +13,34 @@ public class Cake {
     //// Both of these properties violate encapsulation rules. All should be
     // declared private scope and should have getter and/or setter methods.
     ///////
-    public int quantity;
-    public int size;
+    private int quantity;
+    private int size;
 
     //// Some of the methods below violate encapsulation rules. Many should
     //   be private, those that have arguments (setters) need validation rules.
     ////////
 
-    public void setCakeName(String name) {
+    // Encapsulating the setCakeName field
+    public void cakeName(String name) {
         this.cakeName = name;
     }
+    public String getCakeName(){
+        return this.cakeName;
+    }
     
+    // Encapsulating the quantity field
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
     public int getQuantity() {
         return quantity;
+    }
+    //Encapsulating the size field
+    public void setSize(int size){
+        this.size = size;
+    }
+    public int getSize() {
+        return this.size;
     }
     
     /* 
@@ -36,17 +51,28 @@ public class Cake {
     */
 
     // VERY BAD! quantity should be validated for legal range
-    public void gatherIngredients(int quantity) {
-        this.quantity = quantity;
-        System.out.println("Ingredients gathered");
+    private void gatherIngredients(int quantity) {
+        if(quantity > 0 && quantity  < 20) {
+            this.quantity = quantity;
+            System.out.println("Ingredients gathered");
+        }
+        else{
+        JOptionPane.showMessageDialog(null, "Error: quantity is out of range.");
+            System.exit(0);
+        }
     }
 
-    public void mixIngredients() {
+    private void mixIngredients() {
         System.out.println("Ingredients mixed");
     }
 
-    public void bake() {
+    public void bake()throws InterruptedException {
+        gatherIngredients(quantity);
+        mixIngredients();
         System.out.println("Baking...");
+        Thread.sleep(5000);
+        System.out.println("Beep Beep Beep");
+        //takeFromOvenAndLetCool();
     }
 
     public void takeFromOvenAndLetCool() {

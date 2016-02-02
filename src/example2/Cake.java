@@ -21,8 +21,8 @@ public class Cake {
 
     public void setQuantity(int quantity) {
         if(quantity <= 0 || quantity > 10) {
-            throw new IllegalArgumentException("quantity must be greater than 0...");
-            //System.exit(1);
+            JOptionPane.showMessageDialog(null, "Error: quantity is out of range.");
+            System.exit(0);
         }
         this.quantity = quantity;
     }
